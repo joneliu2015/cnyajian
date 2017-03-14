@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;} @media (max-device-width: 780px){#golist{display: block!important;}}#golist {display: none;}
+</style>
+ <script type="text/javascript" src="../../../../api.map.baidu.com/api-type=quick&ak=CAbadaf89a96fabe6594bf2ec5c4c931&v=1.0" tppabs="http://api.map.baidu.com/api?type=quick&ak=CAbadaf89a96fabe6594bf2ec5c4c931&v=1.0"></script>
+<title>Baidu Map</title>
+</head>
+<body> 
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+// 百度地图API功能
+var map = new BMap.Map("allmap");
+var point = new BMap.Point(116.331398,39.897445);
+map.centerAndZoom(point,12);
+         //添加地图缩放控件
+// 创建地址解析器实例
+var myGeo = new BMap.Geocoder();
+// 将地址解析结果显示在地图上,并调整地图视野
+myGeo.getPoint("\u6d59\u6c5f\u7701\u6e29\u5dde\u5e02\u4e2d\u56fd\u978b\u90fd\u4e00\u671f\u978b\u90fd\u8def3\u53f7", function(point){
+  if (point) {
+    map.centerAndZoom(point, 16);
+  	map.addControl(new BMap.ZoomControl()); 
+			map.addControl(new BMap.ScaleControl());  
+		
+		var marker1 = new BMap.Marker(point);  // 创建标注
+	map.addOverlay(marker1);  
+	 
+	var opts = {
+	  width : 200,     // 信息窗口宽度
+	  height: 60,     // 信息窗口高度
+	  title : "温州印象之美鞋业" // 信息窗口标题
+	}
+		var infoWindow = new BMap.InfoWindow("点击红点标记将进入路线查询", opts);  // 创建信息窗口对象 
+	marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow);});
+				
+	
+  }
+}, "北京市");
+</script>
